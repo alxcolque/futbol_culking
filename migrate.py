@@ -19,9 +19,9 @@ def insertUser():
     #user_id = session.query(func.max(User.id)).scalar()
     id = 1
 
-    name = 'Don Juan'
-    username = 'admin'
-    email = 'admin@admin.com'
+    name = 'Don Alec'
+    username = 'kulking'
+    email = 'a.colq3.c@gmail.com'
     password = bcrypt.generate_password_hash('ñlkjhgfd')
     photo = 'user.png'
     role = 'admin'
