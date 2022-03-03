@@ -1,0 +1,265 @@
+{% extends 'layout/app.html' %}
+
+<!-- Inicio bloque body -->
+{% block body %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Hey!</strong> {{ message }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor%}
+{% endif %}
+{% endwith%}
+<!-- Eventos -->
+
+<div class="container">
+  {% if current_user.is_authenticated %}
+  <div class="my-5 py-4">
+    <div class="row">
+      <h5 class="col-sm-8 ">Mis horarios de partidos</h5>
+      <div class="col-sm-4 ">
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Definir Horario
+        </button>
+      </div>
+
+    </div>
+
+    <div class="card">
+      <div class="card-body p-0">
+        <table class="table table-sm">
+          <caption>Lista de Horas reservadas</caption>
+          <thead>
+            <th>#</th>
+            <th>Equipo</th>
+            <th>Periodo</th>
+            <th>Eliminar</th>
+          </thead>
+          <tbody>
+            {% for row in events %}
+            <tr>
+              <td>{{ row.id }}</td>
+              <td> <b>{{ row.title }}:</b> <span>{{ row.description }}</span></td>
+              <td>{{ row.start }} - {{ row.end }}</td>
+              <td>
+                <button type="button" class="btn btn-sm btn-danger" onclick="deleteEvent('{{ row.id }}')"><i class="fa fa-trash"></i></button>
+              </td>
+            </tr>
+            {% endfor%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  <div class="my-5 py-4">
+    <div class="d-flex justify-content-center">
+      <h4 class="">Todos los partidos 
+        {% if current_user.is_authenticated %}
+        <a href="/events" class="btn btn-sm btn-primary">
+          Ver mas ...
+        </a>
+        {% endif %}
+      </h4>
+
+    </div>
+    <div class="card">
+      <div class="card-body p-0">
+        <table class="table table-sm">
+          <caption>Todas las reservaciones</caption>
+          <thead>
+            <th>#</th>
+            <th>Equipo</th>
+            <th>Periodo</th>
+            <th>Color</th>
+          </thead>
+          <tbody>
+            {% for row in allevents %}
+            <tr>
+              <td>{{ row.id }}</td>
+              <td> <b>{{ row.title }}:</b> <span>{{ row.description }}</span></td>
+              <td>{{ row.start }} <b>al</b> {{ row.end }}</td>
+              <td style='background-color:{{ row.color }};'>{{row.color}}</td>
+            </tr>
+            {% endfor%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="col">
+      <div class="card shadow-sm">
+        <img src="https://websystemperu.com/web/121728f/sistema-reservas-canchas.jpg" alt="" width="100%" height="100%">
+        <div class="card-body">
+          <p class="card-text">Campo deportivo de balonpié 5x5, para reservar <a href="/login">INICIE SESIÓN</a> o <a
+              href="/signup">REGÍSTRATE</a> si nos visita por primera vez, en esta web tendrá acceso a la agenda
+            completa</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card shadow-sm">
+        <img src="https://countrysburger.com/wp-content/uploads/2020/11/BOTON-WHATSAPP-01.png" alt="" width="100%" height="100%">
+        <div class="card-body">
+          <p class="card-text">Puesdes hacer 
+            <a href="https://api.whatsapp.com/send?phone=59160427039&text=Hola%20Alec.%20Quiero%20ocupar%20la%20cancha%20Hoy%20a%20las:%2000/00/2022%2000:00%202%20horas." target="_blank">
+              clic Aqui</a> para consultar, o en el ícono flotante de whatsapp.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card shadow-sm">
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.6363007587743!2d-67.06444352873491!3d-17.995650295672785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xff355965a3a8add!2zMTfCsDU5JzQ0LjMiUyA2N8KwMDMnNDQuOCJX!5e0!3m2!1ses-419!2sbo!4v1646344342931!5m2!1ses-419!2sbo" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <div class="card-body">
+          <p class="card-text">Haga clic en la mapa para ubicar el campo deportido, la calle es transitado por los
+            líneas de transporte MINI "112" y MICRO "Q" y ambos transportes salen de Bolivar</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Whatsapp -->
+  <a href="https://api.whatsapp.com/send?phone=59160427039&text=Hola%20Alec.%20Quiero%20ocupar%20la%20cancha%20Hoy%20a%20las:%2000/00/2022%2000:00%202%20horas."
+    class="float" target="_blank">
+    <i class="fa fa-whatsapp my-float"></i></a>
+
+</div>
+
+
+<!-- calendar modal -->
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/events/store2" method="post" id="myForm">
+        <div class="modal-body">
+
+          <div class="mb-3 row">
+            <label for="title" class="col-sm-4 col-form-label">Nombre de Equipo</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" name="title" id="title" placeholder="Ej: Atlethic Club" required>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="description" class="col-sm-4 col-form-label">Descripción</label>
+            <div class="col-sm-8">
+              <textarea name="description" id="description" cols="40%" rows="2"></textarea>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="start" class="col-sm-4 col-form-label">Tiempo de inicio</label>
+            <div class="col-sm-8">
+              <input type="datetime-local" class="form-control" name="start" id="start" required>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="end" class="col-sm-4 col-form-label">Tiempo de Fin</label>
+            <div class="col-sm-8">
+              <input type="datetime-local" class="form-control" name="end" id="end" required>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="color" class="col-sm-4 col-form-label">Color</label>
+            <div class="col-sm-8">
+              <input type="color" class="form-control" name="color" id="color" required>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="phone" class="col-sm-4 col-form-label">Whatsapp</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" name="phone" id="phone" placeholder="ej: 60417039" required>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="btnAccion">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Fin de eventos -->
+
+{% endblock %}
+<!-- Fin bloque body -->
+
+{% block css%}
+
+<style>
+  .float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+  }
+
+  .float:hover {
+    text-decoration: none;
+    color: #25d366;
+    background-color: #fff;
+  }
+
+  .my-float {
+    margin-top: 16px;
+  }
+</style>
+
+{% endblock %}
+<!-- Fin bloque estilos -->
+
+{% block js%}
+
+<script>
+  function deleteEvent(id_event) {
+    $.confirm({
+      title: 'Alto ahí!',
+      content: "¿Seguro desea eliminar este Horario?",
+      buttons: {
+        ok: function () {
+          $.ajax({
+            url: "/events/" + id_event + "/delete",
+            type: 'GET',
+            success: function (data) {
+              location.reload();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+              alert("Ha ocurrido un error vuelva a intentar");
+            }
+          });
+        },
+        cancel: function () {
+            //close
+        }
+
+      }
+
+    });
+  }
+</script>
+
+{% endblock %}
+<!-- Fin bloque scripts -->

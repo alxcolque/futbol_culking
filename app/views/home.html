@@ -1,0 +1,196 @@
+{% extends 'layout/appadmin.html' %}
+
+<!-- Inicio bloque body -->
+{% block body %}
+<div class="my-5 py-4">
+    <div class="main-section">
+      <div class="dashbord">
+        <div class="icon-section">
+          <i class="fa fa-users" aria-hidden="true"></i><br>
+          <small>Usuarios</small>
+          <p>
+            {{cusuario}}
+          </p>
+        </div>
+        <div class="detail-section">
+          <a href="/products">Ver Mas </a>
+        </div>
+      </div>
+      <div class="dashbord dashbord-green">
+        <div class="icon-section">
+          <i class="fa fa-money" aria-hidden="true"></i><br>
+          <small>Pedidos</small>
+          <p>{{cpedido}}</p>
+        </div>
+        <div class="detail-section">
+          <a href="/products">Ver Mas </a>
+        </div>
+      </div>
+      <div class="dashbord dashbord-orange">
+        <div class="icon-section">
+          <i class="fa fa-comment" aria-hidden="true"></i><br>
+          <small>Mensajes</small>
+          <p>233</p>
+        </div>
+        <div class="detail-section">
+          <a href="/products">Ver Mas </a>
+        </div>
+      </div>
+      <div class="dashbord dashbord-blue">
+        <div class="icon-section">
+          <i class="fa fa-adjust" aria-hidden="true"></i><br>
+          <small>Productos</small>
+          <p>{{cproducto}}</p>
+        </div>
+        <div class="detail-section">
+          <a href="/products">Ver Mas</a>
+        </div>
+      </div>
+      <div class="dashbord dashbord-red">
+        <div class="icon-section">
+          <i class="fa fa-coffee" aria-hidden="true"></i><br>
+          <small>Categorias</small>
+          <p>{{ccategoria}}</p>
+        </div>
+        <div class="detail-section">
+          <a href="/products">Ver Mas</a>
+        </div>
+      </div>
+      <div class="dashbord dashbord-skyblue">
+        <div class="icon-section">
+          <i class="fa fa-certificate" aria-hidden="true"></i><br>
+          <small>Clientes</small>
+          <p>{{cclientes}}</p>
+        </div>
+        <div class="detail-section">
+          <a href="/products">Ver Mas </a>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="container">
+    <br>
+    <h3 class="mt-5">Lista de usuarios</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Email</th>
+                <th scope="col">Usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in users %}
+            <tr>
+                <td>{{row.id}}</td>
+                <td>{{row.name}}</td>
+                <td>{{row.email}}</td>
+                <td>{{row.username}}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+{% endblock %}
+<!-- Fin bloque body -->
+
+{% block css%}
+<style>
+    .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+
+  .main-section{
+    width:80%;
+    margin:0 auto;
+    text-align: center;
+    padding: 0px 5px;
+    }
+    .dashbord{
+    width:32%;
+    display: inline-block;
+    background-color:#34495E;
+    color:#fff;
+    margin-top: 50px;
+    }
+    .icon-section i{
+    font-size: 30px;
+    padding:10px;
+    border:1px solid #fff;
+    border-radius:50%;
+    margin-top:-25px;
+    margin-bottom: 10px;
+    background-color:#34495E;
+    }
+    .icon-section p{
+    margin:0px;
+    font-size: 20px;
+    padding-bottom: 10px;
+    }
+    .detail-section{
+    background-color: #2F4254;
+    padding: 5px 0px;
+    }
+    .dashbord .detail-section:hover{
+    background-color: #5a5a5a;
+    cursor: pointer;
+    }
+    .detail-section a{
+    color:#fff;
+    text-decoration: none;
+    }
+    .dashbord-green .icon-section,.dashbord-green .icon-section i{
+    background-color: #16A085;
+    }
+    .dashbord-green .detail-section{
+    background-color: #149077;
+    }
+    .dashbord-orange .icon-section,.dashbord-orange .icon-section i{
+    background-color: #F39C12;
+    }
+    .dashbord-orange .detail-section{
+    background-color: #DA8C10;
+    }
+    .dashbord-blue .icon-section,.dashbord-blue .icon-section i{
+    background-color: #2980B9;
+    }
+    .dashbord-blue .detail-section{
+    background-color:#2573A6;
+    }
+    .dashbord-red .icon-section,.dashbord-red .icon-section i{
+    background-color:#E74C3C;
+    }
+    .dashbord-red .detail-section{
+    background-color:#CF4436;
+    }
+    .dashbord-skyblue .icon-section,.dashbord-skyblue .icon-section i{
+    background-color:#8E44AD;
+    }
+    .dashbord-skyblue .detail-section{
+    background-color:#803D9B;
+    }
+</style>
+{% endblock %}
+<!-- Fin bloque estilos -->
+
+{% block js%}
+<script>
+    /* alert('hello') */
+</script>
+{% endblock %}
+<!-- Fin bloque scripts -->

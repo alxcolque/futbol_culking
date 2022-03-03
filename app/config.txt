@@ -1,0 +1,6 @@
+#db parameters
+_db_user = 'root'
+_db_pass = ''
+_db_host = 'localhost'
+_db_name = 'culkingdb'
+_os_path = 'c:://windos'

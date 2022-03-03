@@ -1,0 +1,110 @@
+{% extends 'layout/appadmin.html' %}
+
+<!-- Inicio bloque body -->
+{% block body %}
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <form class="form-horizontal" method="POST" action="{{url_for('product_route.store')}}"
+            enctype="multipart/form-data">
+            <div class="col-md-12">
+              <div class="p-4">
+                <div class="input-group mb-3">
+                  <label for="">Nombre del producto</label>
+                  <input type="text" name="product" class="form-control" placeholder="Nombre del Producto" required>
+                </div>
+                <div class="input-group mb-3">
+                  <label for="">Precio del producto</label>
+                  <input type="number" required name="price" min="0" step=".01" class="form-control"
+                    placeholder="precio del Producto" required>
+                </div>
+                <div class="input-group mb-3">
+                  <label for="">Descripción del producto</label>
+                  <input type="text" name="description" class="form-control" placeholder="Descripción del Producto" required>
+                </div>
+                <div class="input-group mb-3">
+                  Categoria
+                </div>
+                
+                <select class="form-select form-select-sm" name="category_id" aria-label=".form-select-sm example">
+                  <option selected>Seleccione categoria</option>
+                  {% for data in categories  %}
+                  <option value="{{data.id}}">{{data.category}}</option>
+                  {% endfor %}
+                </select>
+                
+
+                <div class="image">
+                  <img id="preview" class="producto-img img-fluid"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFhAI-XOWPp_J3eigjnX1Cg8SRxFxc5NuP4Vf0fXr6_KEyqJLHsjIWRFPZhj5k2G_jIhc&usqp=CAU"
+                    alt="profile">
+                  <input type="file" name="file" id="file" accept="image/*" required />
+                </div>
+                <div class="valid-feedback">
+                  Los datos son requeridos.
+                </div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary" type="submit">Registrar producto</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+<!-- Fin bloque body -->
+
+{% block css%}
+
+{% endblock %}
+<!-- Fin bloque estilos -->
+
+{% block js%}
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+  function init() {
+    var inputFile = document.getElementById('file');
+    inputFile.addEventListener('change', mostrarImagen, false);
+  }
+
+  function mostrarImagen(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function (event) {
+      var img = document.getElementById('preview');
+      img.src = event.target.result;
+    }
+    reader.readAsDataURL(file);
+  }
+
+  window.addEventListener('load', init, false);
+
+
+
+</script>
+{% endblock %}
+<!-- Fin bloque scripts -->

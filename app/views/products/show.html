@@ -1,0 +1,86 @@
+{% extends 'layout/appadmin.html' %}
+
+<!-- Inicio bloque body -->
+{% block body %}
+<section class="container">
+    <div class="row py-lg-5">
+        <div class="col-lg-12 col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <hr class="featurette-divider">
+
+                    <div class="row">
+                        <div class="col-md-7">
+                            <ul>
+                                <li><h5>{{product.product}}</h5></li>
+                                <li><b>Precio:</b>  {{product.price}} Bs.</li>
+                                <li><b>Descripción:</b>  {{product.description}}</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-5">
+                            <img class="bd-placeholder-img card-img-top"  src="{{ url_for('static', filename='img/' + product.img_url) }}" width="100%" height="225"
+                                aria-label="Placeholde: {{product.product}}" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <title>Placeholde</title>
+                                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                                  dy=".3em"></text>
+                                  <h1>{{product.product}}</h1>
+                              </img>
+                        </div>
+                        
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+<!-- Fin bloque body -->
+
+{% block css%}
+
+{% endblock %}
+<!-- Fin bloque estilos -->
+
+{% block js%}
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+    function init() {
+        var inputFile = document.getElementById('file');
+        inputFile.addEventListener('change', mostrarImagen, false);
+    }
+
+    function mostrarImagen(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            var img = document.getElementById('preview');
+            img.src = event.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+
+    window.addEventListener('load', init, false);
+</script>
+{% endblock %}
+<!-- Fin bloque scripts -->
