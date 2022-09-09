@@ -16,9 +16,9 @@
 {% endwith%}
 <!-- Eventos -->
 
-<div class="container">
+<div class="mt-3">
   {% if current_user.is_authenticated %}
-  <div class="my-5 py-4">
+  <div class="card-body">
     <div class="row">
       <h5 class="col-sm-8 ">Mis horarios de partidos</h5>
       <div class="col-sm-4 ">
@@ -46,7 +46,8 @@
               <td> <b>{{ row.title }}:</b> <span>{{ row.description }}</span></td>
               <td>{{ row.start }} - {{ row.end }}</td>
               <td>
-                <button type="button" class="btn btn-sm btn-danger" onclick="deleteEvent('{{ row.id }}')"><i class="fa fa-trash"></i></button>
+                <button type="button" class="btn btn-sm btn-danger" onclick="deleteEvent('{{ row.id }}')"><i
+                    class="fa fa-trash"></i></button>
               </td>
             </tr>
             {% endfor%}
@@ -56,9 +57,9 @@
     </div>
   </div>
   {% endif %}
-  <div class="my-5 py-4">
+  <div class="mt-2">
     <div class="d-flex justify-content-center">
-      <h4 class="">Todos los partidos 
+      <h4 class="">Todos los partidos
         {% if current_user.is_authenticated %}
         <a href="/events" class="btn btn-sm btn-primary">
           Ver mas ...
@@ -104,10 +105,12 @@
     </div>
     <div class="col">
       <div class="card shadow-sm">
-        <img src="https://countrysburger.com/wp-content/uploads/2020/11/BOTON-WHATSAPP-01.png" alt="" width="100%" height="100%">
+        <img src="https://countrysburger.com/wp-content/uploads/2020/11/BOTON-WHATSAPP-01.png" alt="" width="100%"
+          height="100%">
         <div class="card-body">
-          <p class="card-text">Puesdes hacer 
-            <a href="https://api.whatsapp.com/send?phone=59160427039&text=Hola%20Alec.%20Quiero%20ocupar%20la%20cancha%20Hoy%20a%20las:%2000/00/2022%2000:00%202%20horas." target="_blank">
+          <p class="card-text">Puesdes hacer
+            <a href="https://api.whatsapp.com/send?phone=59160427039&text=Hola%20Alec.%20Quiero%20ocupar%20la%20cancha%20Hoy%20a%20las:%2000/00/2022%2000:00%202%20horas."
+              target="_blank">
               clic Aqui</a> para consultar, o en el ícono flotante de whatsapp.
           </p>
         </div>
@@ -116,7 +119,9 @@
     <div class="col">
       <div class="card shadow-sm">
 
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.6363007587743!2d-67.06444352873491!3d-17.995650295672785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xff355965a3a8add!2zMTfCsDU5JzQ0LjMiUyA2N8KwMDMnNDQuOCJX!5e0!3m2!1ses-419!2sbo!4v1646344342931!5m2!1ses-419!2sbo" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.6363007587743!2d-67.06444352873491!3d-17.995650295672785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xff355965a3a8add!2zMTfCsDU5JzQ0LjMiUyA2N8KwMDMnNDQuOCJX!5e0!3m2!1ses-419!2sbo!4v1646344342931!5m2!1ses-419!2sbo"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         <div class="card-body">
           <p class="card-text">Haga clic en la mapa para ubicar el campo deportivo, la calle es transitado por los
             líneas de transporte MINI "112 cartonbol" y MICRO "Q" y ambos transportes salen de Bolivar</p>
@@ -136,7 +141,8 @@
 
 <!-- calendar modal -->
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -252,7 +258,7 @@
           });
         },
         cancel: function () {
-            //close
+          //close
         }
 
       }

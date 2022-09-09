@@ -5,7 +5,7 @@ let frm = document.getElementById('myForm');
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
-        themeSystem: 'bootstrap',
+        themeSystem: 'standard',
         initialView: 'dayGridMonth',
         locale: 'es',
         headerToolbar: {
